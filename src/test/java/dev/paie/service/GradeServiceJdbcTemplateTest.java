@@ -15,8 +15,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 import dev.paie.config.ServicesConfig;
 import dev.paie.entite.Grade;
 import dev.paie.spring.DataSourceMySQLConfig;
+import dev.paie.spring.JpaConfig;
 
-@ContextConfiguration(classes = {DataSourceMySQLConfig.class})
+@ContextConfiguration(classes = {JpaConfig.class})
 
 @RunWith(SpringRunner.class)
 public class GradeServiceJdbcTemplateTest {
