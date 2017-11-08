@@ -11,12 +11,14 @@ import java.util.stream.Stream;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
 import dev.paie.entite.BulletinSalaire;
+import dev.paie.entite.Utilisateur.ROLES;
 import dev.paie.config.ServicesConfig;
 import dev.paie.config.WebAppConfig;
 import dev.paie.entite.*;
@@ -28,8 +30,13 @@ import dev.paie.spring.JpaConfig;
  *
  */
 @Service
+@Transactional
 public class InitialiserDonneesServiceDev implements InitialiserDonneesService {
 
+	@Autowired private PasswordEncoder passwordEncoder;
+	
+	@Autowired
+	UtilisateurRepository utilisateurRepository;
 	
 	@Autowired
 	private CotisationRepository cotisationRepository;
@@ -84,6 +91,27 @@ public class InitialiserDonneesServiceDev implements InitialiserDonneesService {
 		periodeRepository.save(new Periode(LocalDate.of(2017, 10, 1), LocalDate.of(2017, 10, 31)));
 		periodeRepository.save(new Periode(LocalDate.of(2017, 11, 1), LocalDate.of(2017, 11, 30)));
 		periodeRepository.save(new Periode(LocalDate.of(2017, 12, 1), LocalDate.of(2017, 12, 31)));
+		
+		Utilisateur utilisateur = new Utilisateur();
+		
+		utilisateur.setEstActif(true);
+		utilisateur.setMotDePasse(passwordEncoder.encode("lala"));
+		utilisateur.setNomUtilisateur("joris");
+		utilisateur.setRole(ROLES.ROLE_ADMINISTRATEUR);
+		
+		
+		utilisateurRepository.save(utilisateur);
+		
+		utilisateur = new Utilisateur();
+		
+		utilisateur.setEstActif(true);
+		utilisateur.setMotDePasse(passwordEncoder.encode("lala"));
+		utilisateur.setNomUtilisateur("charles");
+		utilisateur.setRole(ROLES.ROLE_UTILISATEUR);
+		
+		
+		utilisateurRepository.save(utilisateur);
+		
 		
 		
 	}

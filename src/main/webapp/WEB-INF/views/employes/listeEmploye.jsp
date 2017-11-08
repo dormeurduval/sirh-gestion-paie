@@ -31,8 +31,6 @@
         <a class="navbar-brand" href="lister">Bulletin</a>
     </nav>
 
-
-
     <div class="container">
         <!-- <a href="index.html"><i class="icon icon-arrow-left" aria-hidden="true" style="font-size:100px;color:black;"></i></a> -->
         <div class="text-center">

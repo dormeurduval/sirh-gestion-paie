@@ -1,4 +1,5 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %> 
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -87,6 +88,7 @@
                     <button type="submit" class="btn btn-primary" style="margin-left: 54.5%;"><i class="icon icon-check icon-lg" onclick="creerEmploye()"></i> Ajouter</button>
                 </div>
             </div>
+        	<sec:csrfInput/>
         </form>
 
     </div>

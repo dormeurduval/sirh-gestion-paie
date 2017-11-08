@@ -15,6 +15,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -59,6 +60,7 @@ public class RemunerationEmployeController {
 	@Autowired
 	private PeriodeRepository periodeRepository;
 	
+	@Secured({"ROLE_UTILISATEUR", "ROLE_ADMINISTRATEUR"})
 	@RequestMapping(method = RequestMethod.GET, path = "/creer")
 	public ModelAndView formulaireEmploye() {
 		ModelAndView mv = new ModelAndView();
@@ -74,6 +76,7 @@ public class RemunerationEmployeController {
 		return mv;
 	}
 	
+	@Secured("ROLE_ADMINISTRATEUR")
 	@RequestMapping(method = RequestMethod.POST, path = "/creer")
 	public ModelAndView creerEmploye(@RequestParam("entreprise") String entreprise,
 	@RequestParam("matricule") String matricule,@RequestParam("profilRemuneration") String profilRemuneration,
@@ -108,6 +111,7 @@ public class RemunerationEmployeController {
 		return mv;
 	}
 	
+	@Secured({"ROLE_UTILISATEUR", "ROLE_ADMINISTRATEUR"})
 	@RequestMapping(method = RequestMethod.GET, path = "/lister")
 	public ModelAndView creerBulletin() {
 		ModelAndView mv = new ModelAndView();
@@ -121,6 +125,7 @@ public class RemunerationEmployeController {
 		return mv;
 	}
 	
+	@Secured("ROLE_ADMINISTRATEUR")
 	@RequestMapping(method = RequestMethod.POST, path = "/lister")
 	@Transactional
 	public ModelAndView formulaireBulletin(@RequestParam("matricule") String matricule,
