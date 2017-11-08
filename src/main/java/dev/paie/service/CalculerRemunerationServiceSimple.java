@@ -9,6 +9,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import dev.paie.entite.BulletinSalaire;
 import dev.paie.entite.Cotisation;
@@ -22,14 +23,13 @@ import dev.paie.util.PaieUtils;
 @Service
 public class CalculerRemunerationServiceSimple implements CalculerRemunerationService {
 	
-	@Autowired private PaieUtils paieUtils;
+	//@Autowired private PaieUtils paieUtils;
 
-	/* (non-Javadoc)
-	 * @see dev.paie.service.CalculerRemunerationService#calculer(dev.paie.entite.BulletinSalaire)
-	 */
+
 	@Override
+	@Transactional
 	public ResultatCalculRemuneration calculer(BulletinSalaire bulletin) {
-		
+		PaieUtils paieUtils = new PaieUtils();
 		ResultatCalculRemuneration resultat=new ResultatCalculRemuneration();
 		
 		BigDecimal salaireBase = bulletin.getRemunerationEmploye().getGrade().getNbHeuresBase().multiply

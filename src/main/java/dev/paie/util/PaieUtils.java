@@ -7,10 +7,12 @@ import java.text.DecimalFormatSymbols;
 import java.util.Locale;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class PaieUtils {
 
+	@Transactional
 	public String formaterBigDecimal(BigDecimal decimal) {
 		DecimalFormat df = new DecimalFormat();
 		df.setDecimalFormatSymbols(DecimalFormatSymbols.getInstance(Locale.UK));
